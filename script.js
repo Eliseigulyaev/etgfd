@@ -11,24 +11,27 @@ const tasksButton = document.getElementById('tasksButton');
 
 // Данные для страниц
 const jobs = [
-  { title: 'Контентщик', salary: '10 000₽' },
-  { title: 'Закупщик', salary: '10 000₽' },
-  { title: 'Рекламщик', salary: '10 000₽' },
-  { title: 'Дизайнер', salary: '10 000₽' },
-  { title: 'Программист', salary: '10 000₽' },
+  { id: 1, title: 'Контентщик', salary: '10 000₽' },
+  { id: 2, title: 'Закупщик', salary: '10 000₽' },
+  { id: 3, title: 'Рекламщик', salary: '10 000₽' },
+  { id: 4, title: 'Дизайнер', salary: '10 000₽' },
+  { id: 5, title: 'Программист', salary: '10 000₽' },
 ];
 
 const channels = [
-  { title: 'Канал 1', price: '1000₽' },
-  { title: 'Канал 2', price: '2000₽' },
-  { title: 'Канал 3', price: '3000₽' },
+  { id: 1, title: 'Канал 1', price: '1000₽' },
+  { id: 2, title: 'Канал 2', price: '2000₽' },
+  { id: 3, title: 'Канал 3', price: '3000₽' },
 ];
 
 const tasks = [
-  { title: 'Написать статью', price: '500₽' },
-  { title: 'Создать логотип', price: '1000₽' },
-  { title: 'Разработать сайт', price: '5000₽' },
+  { id: 1, title: 'Написать статью', price: '500₽' },
+  { id: 2, title: 'Создать логотип', price: '1000₽' },
+  { id: 3, title: 'Разработать сайт', price: '5000₽' },
 ];
+
+// Избранное
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 // Переход на главный экран
 startButton.addEventListener('click', () => {
@@ -68,7 +71,7 @@ function showWorkPage() {
       <button class="blue-button">Разместить</button>
     </div>
     <div class="menu">
-      <button>Избранное</button>
+      <button onclick="showFavorites()">Избранное</button>
       <button class="blue-button">Фильтр</button>
       <div class="search">
         🔍
@@ -77,7 +80,7 @@ function showWorkPage() {
     </div>
     ${jobs.map(job => `
       <div class="item">
-        <span class="heart">♡</span>
+        <button class="heart-btn ${favorites.includes(job.id) ? 'active' : ''}" data-id="${job.id}">♡</button>
         <p>${job.title} ${job.salary}</p>
         <button onclick="window.open('https://t.me/alexsti', '_blank')">Откликнуться</button>
       </div>
@@ -94,7 +97,7 @@ function showMarketPage() {
       <button class="blue-button">Разместить</button>
     </div>
     <div class="menu">
-      <button>Избранное</button>
+      <button onclick="showFavorites()">Избранное</button>
       <button class="blue-button">Фильтр</button>
       <div class="search">
         🔍
@@ -103,7 +106,7 @@ function showMarketPage() {
     </div>
     ${channels.map(channel => `
       <div class="item">
-        <span class="heart">♡</span>
+        <button class="heart-btn ${favorites.includes(channel.id) ? 'active' : ''}" data-id="${channel.id}">♡</button>
         <p>${channel.title} ${channel.price}</p>
         <button onclick="window.open('https://t.me/alexsti', '_blank')">Купить</button>
       </div>
@@ -120,7 +123,7 @@ function showTasksPage() {
       <button class="blue-button">Разместить</button>
     </div>
     <div class="menu">
-      <button>Избранное</button>
+      <button onclick="showFavorites()">Избранное</button>
       <button class="blue-button">Фильтр</button>
       <div class="search">
         🔍
@@ -129,7 +132,7 @@ function showTasksPage() {
     </div>
     ${tasks.map(task => `
       <div class="item">
-        <span class="heart">♡</span>
+        <button class="heart-btn ${favorites.includes(task.id) ? 'active' : ''}" data-id="${task.id}">♡</button>
         <p>${task.title} ${task.price}</p>
         <button onclick="window.open('https://t.me/alexsti', '_blank')">Откликнуться</button>
       </div>
@@ -140,10 +143,36 @@ function showTasksPage() {
 
 // Обработчик для сердечек
 function addHeartListeners() {
-  const hearts = document.querySelectorAll('.heart');
+  const hearts = document.querySelectorAll('.heart-btn');
   hearts.forEach(heart => {
     heart.addEventListener('click', () => {
+      const id = heart.dataset.id;
       heart.classList.toggle('active');
+      if (favorites.includes(id)) {
+        favorites = favorites.filter(f => f !== id);
+      } else {
+        favorites.push(id);
+      }
+      localStorage.setItem('favorites', JSON.stringify(favorites));
     });
   });
+}
+
+// Показать избранное
+function showFavorites() {
+  const favoriteItems = [...jobs, ...channels, ...tasks].filter(item => favorites.includes(item.id));
+  content.innerHTML = `
+    <div class="header">
+      <h2>Избранное</h2>
+      <button class="blue-button" onclick="showWorkPage()">Назад</button>
+    </div>
+    ${favoriteItems.map(item => `
+      <div class="item">
+        <button class="heart-btn active" data-id="${item.id}">♡</button>
+        <p>${item.title} ${item.salary || item.price}</p>
+        <button onclick="window.open('https://t.me/alexsti', '_blank')">${item.salary ? 'Откликнуться' : 'Купить'}</button>
+      </div>
+    `).join('')}
+  `;
+  addHeartListeners();
 }
