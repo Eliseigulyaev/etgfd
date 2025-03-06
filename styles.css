@@ -6,14 +6,30 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f5f5f5;
+  overflow: hidden;
 }
 
 .page {
   text-align: center;
   width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
+  height: 100%;
+  position: relative;
+}
+
+#welcomePage {
+  background-image: url('https://i.yapx.cc/YiSWD.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-content {
+  background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон */
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .hidden {
@@ -89,11 +105,4 @@ body {
 
 .header h2 {
   margin: 0;
-}
-
-.welcome-image {
-  width: 100%;
-  max-width: 300px;
-  border-radius: 10px;
-  margin-bottom: 20px;
 }
