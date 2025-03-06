@@ -1,31 +1,107 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Telegram Team Hub</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Team Hub</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .page {
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.3s ease;
+        }
+
+        #welcomePage {
+            background: url('https://i.yapx.cc/YiSWD.jpg') center/cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        #mainPage {
+            transform: translateX(100%);
+            background: white;
+        }
+
+        #mainPage.active {
+            transform: translateX(0);
+        }
+
+        .heart-btn {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .heart-btn.active {
+            background: red;
+            border-color: red;
+        }
+
+        /* Остальные стили остаются аналогичными предыдущей версии */
+    </style>
 </head>
 <body>
-  <!-- Первая страница -->
-  <div id="welcomePage" class="page">
-    <h1>Добро пожаловать в Telegram Team Hub</h1>
-    <button id="startButton" class="blue-button">Начать</button>
-  </div>
-
-  <!-- Главный экран -->
-  <div id="mainPage" class="page hidden">
-    <!-- Контент страницы -->
-    <div id="content"></div>
-
-    <!-- Нижние кнопки -->
-    <div class="bottom-nav">
-      <button id="workButton" class="nav-button">РАБОТА</button>
-      <button id="marketButton" class="nav-button">БИРЖА</button>
-      <button id="tasksButton" class="nav-button">ЗАДАЧИ</button>
+    <div id="welcomePage" class="page">
+        <h1>Добро пожаловать в Telegram Team Hub</h1>
+        <button id="startButton" class="blue-button">Начать</button>
     </div>
-  </div>
 
-  <script src="script.js"></script>
+    <div id="mainPage" class="page">
+        <!-- Контент главной страницы -->
+    </div>
+
+    <script>
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        // Инициализация сердечек
+        function initHearts() {
+            document.querySelectorAll('.heart-btn').forEach(btn => {
+                const id = btn.dataset.id;
+                btn.classList.toggle('active', favorites.includes(id));
+                
+                btn.onclick = () => {
+                    btn.classList.toggle('active');
+                    if (favorites.includes(id)) {
+                        favorites = favorites.filter(f => f !== id);
+                    } else {
+                        favorites.push(id);
+                    }
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                };
+            });
+        }
+
+        // Показать избранное
+        function showFavorites() {
+            // Фильтрация и отображение избранных элементов
+        }
+
+        // Обработчик кнопки "Начать"
+        document.getElementById('startButton').addEventListener('click', () => {
+            document.getElementById('welcomePage').style.display = 'none';
+            document.getElementById('mainPage').classList.add('active');
+        });
+    </script>
 </body>
 </html>
