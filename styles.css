@@ -90,3 +90,10 @@ body {
 .header h2 {
   margin: 0;
 }
+
+.welcome-image {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
