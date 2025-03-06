@@ -30,7 +30,7 @@ const tasks = [
   { id: 3, title: 'Разработать сайт', price: '5000₽' },
 ];
 
-// Избранное
+// Избранное (новый формат: {type: 'job|channel|task', id: number})
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 // Переход на главный экран
@@ -80,7 +80,9 @@ function showWorkPage() {
     </div>
     ${jobs.map(job => `
       <div class="item">
-        <button class="heart-btn ${favorites.includes(job.id) ? 'active' : ''}" data-id="${job.id}">♡</button>
+        <button class="heart-btn ${isFavorite('job', job.id) ? 'active' : ''}" 
+                data-type="job" 
+                data-id="${job.id}">♡</button>
         <p>${job.title} ${job.salary}</p>
         <button onclick="window.open('https://t.me/alexsti', '_blank')">Откликнуться</button>
       </div>
@@ -106,7 +108,9 @@ function showMarketPage() {
     </div>
     ${channels.map(channel => `
       <div class="item">
-        <button class="heart-btn ${favorites.includes(channel.id) ? 'active' : ''}" data-id="${channel.id}">♡</button>
+        <button class="heart-btn ${isFavorite('channel', channel.id) ? 'active' : ''}" 
+                data-type="channel" 
+                data-id="${channel.id}">♡</button>
         <p>${channel.title} ${channel.price}</p>
         <button onclick="window.open('https://t.me/alexsti', '_blank')">Купить</button>
       </div>
@@ -132,7 +136,9 @@ function showTasksPage() {
     </div>
     ${tasks.map(task => `
       <div class="item">
-        <button class="heart-btn ${favorites.includes(task.id) ? 'active' : ''}" data-id="${task.id}">♡</button>
+        <button class="heart-btn ${isFavorite('task', task.id) ? 'active' : ''}" 
+                data-type="task" 
+                data-id="${task.id}">♡</button>
         <p>${task.title} ${task.price}</p>
         <button onclick="window.open('https://t.me/alexsti', '_blank')">Откликнуться</button>
       </div>
@@ -146,31 +152,53 @@ function addHeartListeners() {
   const hearts = document.querySelectorAll('.heart-btn');
   hearts.forEach(heart => {
     heart.addEventListener('click', () => {
-      const id = heart.dataset.id;
+      const type = heart.dataset.type; // Тип элемента
+      const id = Number(heart.dataset.id); // ID элемента
       heart.classList.toggle('active');
-      if (favorites.includes(id)) {
-        favorites = favorites.filter(f => f !== id);
+      
+      // Поиск в избранном
+      const index = favorites.findIndex(f => f.type === type && f.id === id);
+      
+      if (index > -1) {
+        favorites.splice(index, 1); // Удалить
       } else {
-        favorites.push(id);
+        favorites.push({ type, id }); // Добавить
       }
+      
       localStorage.setItem('favorites', JSON.stringify(favorites));
     });
   });
 }
 
+// Проверка на избранное
+function isFavorite(type, id) {
+  return favorites.some(f => f.type === type && f.id === id);
+}
+
 // Показать избранное
 function showFavorites() {
-  const favoriteItems = [...jobs, ...channels, ...tasks].filter(item => favorites.includes(item.id));
+  const favoriteItems = [
+    ...jobs.map(item => ({ ...item, type: 'job' })),
+    ...channels.map(item => ({ ...item, type: 'channel' })),
+    ...tasks.map(item => ({ ...item, type: 'task' }))
+  ].filter(item => 
+    favorites.some(f => f.type === item.type && f.id === item.id)
+  );
+
   content.innerHTML = `
     <div class="header">
       <h2>Избранное</h2>
-      <button class="blue-button" onclick="showWorkPage()">Назад</button>
+      <button class="blue-button" onclick="history.back()">Назад</button>
     </div>
     ${favoriteItems.map(item => `
       <div class="item">
-        <button class="heart-btn active" data-id="${item.id}">♡</button>
+        <button class="heart-btn active" 
+                data-type="${item.type}" 
+                data-id="${item.id}">♡</button>
         <p>${item.title} ${item.salary || item.price}</p>
-        <button onclick="window.open('https://t.me/alexsti', '_blank')">${item.salary ? 'Откликнуться' : 'Купить'}</button>
+        <button onclick="window.open('https://t.me/alexsti', '_blank')">
+          ${item.type === 'job' ? 'Откликнуться' : 'Купить'}
+        </button>
       </div>
     `).join('')}
   `;
