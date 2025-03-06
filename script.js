@@ -131,4 +131,19 @@ function showTasksPage() {
       <div class="item">
         <span class="heart">♡</span>
         <p>${task.title} ${task.price}</p>
-        <button onclick="window.open('https://t.me/alexsti
+        <button onclick="window.open('https://t.me/alexsti', '_blank')">Откликнуться</button>
+      </div>
+    `).join('')}
+  `;
+  addHeartListeners();
+}
+
+// Обработчик для сердечек
+function addHeartListeners() {
+  const hearts = document.querySelectorAll('.heart');
+  hearts.forEach(heart => {
+    heart.addEventListener('click', () => {
+      heart.classList.toggle('active');
+    });
+  });
+}
