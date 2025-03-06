@@ -26,7 +26,7 @@ body {
 }
 
 .welcome-content {
-  background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон */
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;
   border-radius: 10px;
   text-align: center;
@@ -67,7 +67,8 @@ body {
   margin: 0 5px;
   border-radius: 5px;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  font-weight: bold;
 }
 
 .nav-button.active {
@@ -77,6 +78,9 @@ body {
 }
 
 .item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: white;
   padding: 10px;
   margin: 10px 0;
@@ -84,13 +88,14 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.item button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
+.heart {
+  font-size: 20px;
   cursor: pointer;
+  color: #ccc;
+}
+
+.heart.active {
+  color: red;
 }
 
 .header {
@@ -105,4 +110,35 @@ body {
 
 .header h2 {
   margin: 0;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.menu button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.menu .search {
+  display: flex;
+  align-items: center;
+}
+
+.menu .search input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-left: 10px;
 }
