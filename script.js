@@ -35,10 +35,13 @@ let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 // Переход на главный экран
 startButton.addEventListener('click', () => {
-  welcomePage.classList.add('hidden');
-  mainPage.classList.remove('hidden');
-  showWorkPage(); // По умолчанию открываем страницу "РАБОТА"
+  welcomePage.classList.remove('active');
+  mainPage.classList.add('active');
+  showWorkPage();
 });
+
+welcomePage.classList.add('active');
+mainPage.classList.remove('active');
 
 // Обработчики для нижних кнопок
 workButton.addEventListener('click', () => {
