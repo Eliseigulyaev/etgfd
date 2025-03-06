@@ -164,3 +164,11 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
+/* Исправление для корректного переключения страниц */
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
