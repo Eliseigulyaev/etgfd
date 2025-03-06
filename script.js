@@ -68,7 +68,7 @@ function showWorkPage() {
       <button class="blue-button">Разместить</button>
     </div>
     <div class="menu">
-      <button>Избранное</button>
+      <button class="red-button">Избранное</button>
       <button class="blue-button">Фильтр</button>
       <div class="search">
         🔍
@@ -78,8 +78,7 @@ function showWorkPage() {
     ${jobs.map(job => `
       <div class="item">
         <span class="heart">♡</span>
-        <p>${job.title} ${job.salary}</p>
-        <button onclick="window.open('https://t.me/alexsti', '_blank')">Откликнуться</button>
+        ${job.title} ${job.salary} <button class="blue-button">Откликнуться</button>
       </div>
     `).join('')}
   `;
@@ -94,7 +93,7 @@ function showMarketPage() {
       <button class="blue-button">Разместить</button>
     </div>
     <div class="menu">
-      <button>Избранное</button>
+      <button class="red-button">Избранное</button>
       <button class="blue-button">Фильтр</button>
       <div class="search">
         🔍
@@ -104,8 +103,7 @@ function showMarketPage() {
     ${channels.map(channel => `
       <div class="item">
         <span class="heart">♡</span>
-        <p>${channel.title} ${channel.price}</p>
-        <button onclick="window.open('https://t.me/alexsti', '_blank')">Купить</button>
+        ${channel.title} ${channel.price} <button class="blue-button">Купить</button>
       </div>
     `).join('')}
   `;
@@ -120,7 +118,7 @@ function showTasksPage() {
       <button class="blue-button">Разместить</button>
     </div>
     <div class="menu">
-      <button>Избранное</button>
+      <button class="red-button">Избранное</button>
       <button class="blue-button">Фильтр</button>
       <div class="search">
         🔍
@@ -130,8 +128,7 @@ function showTasksPage() {
     ${tasks.map(task => `
       <div class="item">
         <span class="heart">♡</span>
-        <p>${task.title} ${task.price}</p>
-        <button onclick="window.open('https://t.me/alexsti', '_blank')">Откликнуться</button>
+        ${task.title} ${task.price} <button class="blue-button">Откликнуться</button>
       </div>
     `).join('')}
   `;
