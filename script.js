@@ -63,21 +63,26 @@ function moveButton(activeButton) {
 // Отображение страницы "Работа"
 function showWorkPage() {
   content.innerHTML = `
-    <h2>Вакансии</h2>
+    <div class="header">
+      <h2>Вакансии</h2>
+      <button class="blue-button">Разместить</button>
+    </div>
     ${jobs.map(job => `
       <div class="item">
         <p>${job.title} - ${job.salary}</p>
         <button onclick="window.open('https://t.me/alexsti', '_blank')">Откликнуться</button>
       </div>
     `).join('')}
-    <button class="blue-button" style="margin-top: 20px;">Разместить вакансию</button>
   `;
 }
 
 // Отображение страницы "Биржа"
 function showMarketPage() {
   content.innerHTML = `
-    <h2>Биржа каналов</h2>
+    <div class="header">
+      <h2>Биржа</h2>
+      <button class="blue-button">Разместить</button>
+    </div>
     ${channels.map(channel => `
       <div class="item">
         <p>${channel.title} - ${channel.price}</p>
@@ -90,7 +95,10 @@ function showMarketPage() {
 // Отображение страницы "Задачи"
 function showTasksPage() {
   content.innerHTML = `
-    <h2>Задачи</h2>
+    <div class="header">
+      <h2>Задачи</h2>
+      <button class="blue-button">Разместить</button>
+    </div>
     ${tasks.map(task => `
       <div class="item">
         <p>${task.title} - ${task.price}</p>
