@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telegram Team Hub</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Первая страница -->
+  <div id="welcomePage" class="page">
+    <h1>Добро пожаловать в Telegram Team Hub</h1>
+    <button id="startButton" class="blue-button">Начать</button>
+  </div>
+
+  <!-- Главный экран -->
+  <div id="mainPage" class="page hidden">
+    <!-- Контент страницы -->
+    <div id="content"></div>
+
+    <!-- Нижние кнопки -->
+    <div class="bottom-nav">
+      <button id="workButton" class="nav-button">Работа</button>
+      <button id="marketButton" class="nav-button">Биржа</button>
+      <button id="tasksButton" class="nav-button">Задачи</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
