@@ -68,7 +68,7 @@ function showWorkPage() {
       <button class="blue-button">Разместить</button>
     </div>
     <div class="menu">
-      <button class="red-button">Избранное</button>
+      <button>Избранное</button>
       <button class="blue-button">Фильтр</button>
       <div class="search">
         🔍
@@ -78,7 +78,8 @@ function showWorkPage() {
     ${jobs.map(job => `
       <div class="item">
         <span class="heart">♡</span>
-        ${job.title} ${job.salary} <button class="blue-button">Откликнуться</button>
+        <p>${job.title} ${job.salary}</p>
+        <button onclick="window.open('https://t.me/alexsti', '_blank')">Откликнуться</button>
       </div>
     `).join('')}
   `;
@@ -93,7 +94,7 @@ function showMarketPage() {
       <button class="blue-button">Разместить</button>
     </div>
     <div class="menu">
-      <button class="red-button">Избранное</button>
+      <button>Избранное</button>
       <button class="blue-button">Фильтр</button>
       <div class="search">
         🔍
@@ -103,7 +104,8 @@ function showMarketPage() {
     ${channels.map(channel => `
       <div class="item">
         <span class="heart">♡</span>
-        ${channel.title} ${channel.price} <button class="blue-button">Купить</button>
+        <p>${channel.title} ${channel.price}</p>
+        <button onclick="window.open('https://t.me/alexsti', '_blank')">Купить</button>
       </div>
     `).join('')}
   `;
@@ -118,7 +120,7 @@ function showTasksPage() {
       <button class="blue-button">Разместить</button>
     </div>
     <div class="menu">
-      <button class="red-button">Избранное</button>
+      <button>Избранное</button>
       <button class="blue-button">Фильтр</button>
       <div class="search">
         🔍
@@ -128,7 +130,8 @@ function showTasksPage() {
     ${tasks.map(task => `
       <div class="item">
         <span class="heart">♡</span>
-        ${task.title} ${task.price} <button class="blue-button">Откликнуться</button>
+        <p>${task.title} ${task.price}</p>
+        <button onclick="window.open('https://t.me/alexsti', '_blank')">Откликнуться</button>
       </div>
     `).join('')}
   `;
