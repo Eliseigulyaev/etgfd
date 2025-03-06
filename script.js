@@ -11,11 +11,11 @@ const tasksButton = document.getElementById('tasksButton');
 
 // Данные для страниц
 const jobs = [
-  { title: 'Контентщик', salary: '10к мес' },
-  { title: 'Закупщик', salary: '10к мес' },
-  { title: 'Рекламщик', salary: '10к мес' },
-  { title: 'Дизайнер', salary: '10к мес' },
-  { title: 'Программист', salary: '10к мес' },
+  { title: 'Контентщик', salary: '10 000₽' },
+  { title: 'Закупщик', salary: '10 000₽' },
+  { title: 'Рекламщик', salary: '10 000₽' },
+  { title: 'Дизайнер', salary: '10 000₽' },
+  { title: 'Программист', salary: '10 000₽' },
 ];
 
 const channels = [
@@ -34,7 +34,7 @@ const tasks = [
 startButton.addEventListener('click', () => {
   welcomePage.classList.add('hidden');
   mainPage.classList.remove('hidden');
-  showWorkPage(); // По умолчанию открываем страницу "Работа"
+  showWorkPage(); // По умолчанию открываем страницу "РАБОТА"
 });
 
 // Обработчики для нижних кнопок
@@ -60,50 +60,75 @@ function moveButton(activeButton) {
   activeButton.classList.add('active');
 }
 
-// Отображение страницы "Работа"
+// Отображение страницы "РАБОТА"
 function showWorkPage() {
   content.innerHTML = `
     <div class="header">
       <h2>Вакансии</h2>
       <button class="blue-button">Разместить</button>
     </div>
+    <div class="menu">
+      <button>Избранное</button>
+      <button class="blue-button">Фильтр</button>
+      <div class="search">
+        🔍
+        <input type="text" placeholder="Поиск вакансий">
+      </div>
+    </div>
     ${jobs.map(job => `
       <div class="item">
-        <p>${job.title} - ${job.salary}</p>
+        <span class="heart">♡</span>
+        <p>${job.title} ${job.salary}</p>
         <button onclick="window.open('https://t.me/alexsti', '_blank')">Откликнуться</button>
       </div>
     `).join('')}
   `;
+  addHeartListeners();
 }
 
-// Отображение страницы "Биржа"
+// Отображение страницы "БИРЖА"
 function showMarketPage() {
   content.innerHTML = `
     <div class="header">
       <h2>Биржа</h2>
       <button class="blue-button">Разместить</button>
     </div>
+    <div class="menu">
+      <button>Избранное</button>
+      <button class="blue-button">Фильтр</button>
+      <div class="search">
+        🔍
+        <input type="text" placeholder="Поиск каналов">
+      </div>
+    </div>
     ${channels.map(channel => `
       <div class="item">
-        <p>${channel.title} - ${channel.price}</p>
+        <span class="heart">♡</span>
+        <p>${channel.title} ${channel.price}</p>
         <button onclick="window.open('https://t.me/alexsti', '_blank')">Купить</button>
       </div>
     `).join('')}
   `;
+  addHeartListeners();
 }
 
-// Отображение страницы "Задачи"
+// Отображение страницы "ЗАДАЧИ"
 function showTasksPage() {
   content.innerHTML = `
     <div class="header">
       <h2>Задачи</h2>
       <button class="blue-button">Разместить</button>
     </div>
+    <div class="menu">
+      <button>Избранное</button>
+      <button class="blue-button">Фильтр</button>
+      <div class="search">
+        🔍
+        <input type="text" placeholder="Поиск задач">
+      </div>
+    </div>
     ${tasks.map(task => `
       <div class="item">
-        <p>${task.title} - ${task.price}</p>
-        <button onclick="window.open('https://t.me/alexsti', '_blank')">Откликнуться</button>
-      </div>
-    `).join('')}
-  `;
-}
+        <span class="heart">♡</span>
+        <p>${task.title} ${task.price}</p>
+        <button onclick="window.open('https://t.me/alexsti
