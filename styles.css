@@ -16,7 +16,6 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  transition: opacity 0.3s ease; /* Плавное исчезновение */
 }
 
 #welcomePage {
@@ -28,27 +27,15 @@ body {
   justify-content: center;
   align-items: center;
   color: white;
-  opacity: 1; /* Начальная прозрачность */
 }
 
-#welcomePage.hidden {
-  opacity: 0; /* Плавное исчезновение */
-  pointer-events: none; /* Отключаем взаимодействие с исчезнувшей страницей */
+#welcomePage h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
-#mainPage {
-  opacity: 0; /* Начальная прозрачность */
-  pointer-events: none; /* Отключаем взаимодействие с главной страницей */
-}
-
-#mainPage.visible {
-  opacity: 1; /* Плавное появление */
-  pointer-events: auto; /* Включаем взаимодействие с главной страницей */
-}
-
-/* Стили для кнопки "Начать" */
-#startButton {
-  background-color: #007bff; /* Голубой цвет */
+#welcomePage .blue-button {
+  background-color: #007bff;
   color: white;
   border: none;
   padding: 15px 30px;
@@ -56,14 +43,12 @@ body {
   cursor: pointer;
   font-size: 18px;
   font-weight: bold;
-  transition: background-color 0.3s ease; /* Плавное изменение цвета */
 }
 
-#startButton:hover {
-  background-color: #0056b3; /* Темно-голубой цвет при наведении */
+.hidden {
+  display: none;
 }
 
-/* Остальные стили */
 .bottom-nav {
   display: flex;
   justify-content: space-between;
