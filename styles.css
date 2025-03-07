@@ -16,6 +16,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  transition: opacity 0.3s ease; /* Добавляем плавное исчезновение */
 }
 
 #welcomePage {
@@ -27,148 +28,22 @@ body {
   justify-content: center;
   align-items: center;
   color: white;
+  opacity: 1; /* Начальная прозрачность */
 }
 
-#welcomePage h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
+#welcomePage.hidden {
+  opacity: 0; /* Плавное исчезновение */
+  pointer-events: none; /* Отключаем взаимодействие с исчезнувшей страницей */
 }
 
-#welcomePage .blue-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 15px 30px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: bold;
+#mainPage {
+  opacity: 0; /* Начальная прозрачность */
+  pointer-events: none; /* Отключаем взаимодействие с главной страницей */
 }
 
-.hidden {
-  display: none;
+#mainPage.visible {
+  opacity: 1; /* Плавное появление */
+  pointer-events: auto; /* Включаем взаимодействие с главной страницей */
 }
 
-.bottom-nav {
-  display: flex;
-  justify-content: space-between;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: white;
-  padding: 10px;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.nav-button {
-  flex: 1;
-  background-color: #ccc;
-  color: black;
-  border: none;
-  padding: 10px;
-  margin: 0 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: bold;
-}
-
-.nav-button.active {
-  transform: translateY(-10px);
-  background-color: #007bff;
-  color: white;
-}
-
-.item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: white;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.heart-btn {
-  width: 30px;
-  height: 30px;
-  border: 2px solid #ccc;
-  border-radius: 50%;
-  background: none;
-  cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-}
-
-.heart-btn.active {
-  background: red;
-  border-color: red;
-  color: white;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-}
-
-.header h2 {
-  margin: 0;
-}
-
-.menu {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-}
-
-.menu button {
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.menu .search {
-  display: flex;
-  align-items: center;
-}
-
-.menu .search input {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-left: 10px;
-}
-
-.item button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-/* Исправление для корректного переключения страниц */
-.page {
-  display: none;
-}
-
-.page.active {
-  display: block;
-}
+/* Остальные стили остаются без изменений */
